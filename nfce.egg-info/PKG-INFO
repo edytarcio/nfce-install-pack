@@ -1,0 +1,79 @@
+Metadata-Version: 1.1
+Name: nfce
+Version: 0.0.1
+Summary: Wrapper for DarumaFramework
+Home-page: http://www.armazemparaiba.com.br
+Author: Edytarcio Pereira
+Author-email: edytarcio.silva@armazemparaiba.com.br
+License: Licenca Comercial
+
+Copyright (c) 2015 Armazem Paraiba 
+
+Description: DANFE NFCe
+        ----------
+        O DANFE NFCe ou apenas DANFE é uma Nota Fiscal Consumidor Eletronica que tem o formato de funcionamento semelhante ao da NFE - Nota Fiscal Eletrônica.
+        A documentação é enviada diretamente à SEFAZ, onde o consumidor poderá prontamente fazer a consulta da NFCe. A proposta do DANFE também prevê o 
+        envio das informações diretamente para um dispositivo móvel ao invés de sua impressão. 
+        
+        O DANFE NFCe é uma alternativa ao tradicional Cupom Fical, hoje, com homologação PAF.
+        
+          .. image:: nfce.png
+        
+        
+        Integração do ambiente ZIM com o DarumaFramework
+        -----------------------------------------------
+        A comunicação do Zim com o DarumaFramework é feita através de um *binding* escrito em python - ``nfce.py`` - que viabiliza a utilização de
+        metodos disponíveis no DarumaFramework para emissão da NFCe. De forma semelhante, existe também o modulo ``base.py`` que é uma ponte para os métodos 
+        voltados para o ECF - Emissor de Cupom Fiscal. 
+        
+        Em um cenário mais específico de integração, o ZIM se comunica com Python através de arquivos XMLs e este por sua vez carrega o DarumaFramework. Em seguida, 
+        para a emissão da NFCe, o DarumaFramework se comunica com o Portal Invoicy da Migrate e o web service faz a validaçao das informações que foram enviadas, 
+        transmitindo-as para a SEFAZ. Não havendo restrições a SEFAZ autoriza a emissão do DANFE e a NFCe é emitida. 
+        
+        
+        Requisitos para emissão da NFCe
+        -------------------------------
+        Os requisitos abaixo são de acordo com o nosso ambiente de desenvolvimento. Hoje, utilizando uma solução NFCe proposta pela parceria entre a 
+        Migrate e a Daruma:
+        
+          * *Certificado digital para a empresa emitente do NFCe* - Certificados e senhas são obtidos junto à sefaz
+          
+          * *Biblioteca DarumaFramework* - O download pode ser feito a partir do site `Desenvolvedores Daruma <http://www.desenvolvedoresdaruma.com.br/home/index.php>`_ na página da NFCe.
+          
+          * *Migrate Web Service* - Web Service responsável por fazer a comunicação com a SEFAZ.
+          
+          * *Slackware 13.37.0 ou superior* - A Daruma pode fornecer compilações para outras distribuições do Linux, como o Ubuntu.
+          
+          * *Obtenção das chaves EmpPK e EmpCK* - As chaves são fornecidas pela Daruma e Migrate respectivamente. 
+        
+        Instalacao
+        ----------  
+        Para instalar siga conforme abaixo:
+        
+          Copie o arquivo de instalacao - de acordo com a versao desejada - para o diretorio /u1 
+          # tar -xvf /u1/nfce.X.X.X.tar.gz
+          # cd  /u1/nfce.X.X.X
+        
+          Edite o arquivo Makefile e altere a sigla da loja. Neste exemplo, esta a sigla 'MTO' ("python2.7 /usr/local/lib/nfce.py -p reload gne -l MTO")
+          # vim Makefile
+          # sudo make install
+        
+        
+          Adicione ao arquivo /etc/rc.d/rc.local as linhas abaixo:
+        
+          if [ -x /etc/rc.d/rc.nfce ]; then
+            /etc/rc.d/rc.nfce
+          fi
+        
+        
+        
+        
+Keywords: python,daruma,nfce
+Platform: 
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Topic :: Communications
+Classifier: Topic :: Utilities

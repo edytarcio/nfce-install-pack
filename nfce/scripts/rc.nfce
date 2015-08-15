@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.nfce
+#
+# Initialize configuration for NFCe 
+#
+# file executable:  chmod 755 /etc/rc.d/rc.nfce
+#
+# 
+# 
+ntpdate 172.16.99.5
+ntpdate a.st1.ntp.br
+ntpdate b.st1.ntp.br
+
+# Caixa NFCe
+su imprime -c 'stty 115200 < /dev/ttyS0'
+su imprime -c 'stty 115200 < /dev/ttyUSB0'
+su imprime -c 'ln -sf /dev/ttyUSB0 /dev/lp'
+su imprime -c 'chmod 777 /dev/ttyS*'
+su imprime -c 'chmod 777 /dev/ttyU*'
+
+
+#mkdir -p /u1/eddie/
+#touch /u1/eddie/testing.txt
